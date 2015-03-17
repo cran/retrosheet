@@ -1,0 +1,13 @@
+3a2260abfd4cdca7afa90736b7c6d2e2 *DESCRIPTION
+9892554e2cbad0619181ac79f0dcdc9c *NAMESPACE
+250e2b2bd8026f5fbfcce7e834b03053 *R/getFileNames.R
+759f47ae0bb78b89a1d63bc815621506 *R/getPartialGamelog.R
+8301976130a9f6831964f4974c2637e9 *R/getRetrosheet.R
+81d8ec014ed80ebcc14f26ba440c342e *R/getTeamIDs.R
+4bce117cd1bf21147924b188a8b722c9 *R/internals.R
+ce00ecb461fa8c0c4f24203b4b6c1807 *R/onLoad.R
+6a59ed4f3f6263a069bc5772b58eddf3 *R/retrosheetFields.R
+1c6d81710bdb19c7d6e41d7aeee47875 *man/getFileNames.Rd
+593efa4ee8e27fd11d4d0e669bd66cea *man/getPartialGamelog.Rd
+fe08430f3e9f1355dc8f2b7b1688ee13 *man/getRetrosheet.Rd
+3e9459ae4e21b93ff3823ed3b3408b3e *man/getTeamIDs.Rd
