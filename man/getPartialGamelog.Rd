@@ -15,10 +15,10 @@ gamelogFields
 \arguments{
 \item{year}{A single four-digit year.}
 
-\item{glFields}{character.  The desired game-log columns (a subset of
-\code{gamelogFields}).}
+\item{glFields}{character.  The desired game-log columns.  This should be a
+subset of \code{gamelogFields}, and \strong{not} the entire vector.}
 
-\item{date}{One of either NULL (the default), or a four-digit
+\item{date}{One of either NULL (the default), or a single four-digit
 character string identifying the date 'mmdd'}
 
 \item{...}{further arguments passed to \code{\link[utils]{download.file}}}

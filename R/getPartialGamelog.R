@@ -5,9 +5,9 @@
 #' to choose the columns and date for game-log data.
 #'
 #' @param year A single four-digit year.
-#' @param glFields character.  The desired game-log columns (a subset of
-#' \code{gamelogFields}).
-#' @param date One of either NULL (the default), or a four-digit
+#' @param glFields character.  The desired game-log columns.  This should be a
+#' subset of \code{gamelogFields}, and \strong{not} the entire vector.
+#' @param date One of either NULL (the default), or a single four-digit
 #' character string identifying the date 'mmdd'
 #' @param ... further arguments passed to \code{\link[utils]{download.file}}
 #'
@@ -55,7 +55,7 @@ getPartialGamelog <- function(year, glFields, date = NULL, ...) {
     out <- if(is.null(date)) {
         fread(fname, select = sel, header = FALSE)
     } else {
-        command <- sprintf("grep '%s' %s", paste0(year, date), fname)
+        command <- sprintf("grep '%s' %s", paste0(year, date), basename(fname))
         fread(command, header = FALSE, select = sel)
     }
 
