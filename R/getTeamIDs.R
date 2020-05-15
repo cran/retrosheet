@@ -13,8 +13,7 @@
 #' @details All currently available years can be retrieved with
 #' \code{type.convert(substr(getFileNames()$event, 1L, 4L))}
 #'
-#' @importFrom httr http_error GET write_disk
-#' @importFrom data.table fread
+#' @importFrom httr http_error write_disk RETRY timeout
 #' @export
 #'
 #' @examples \donttest{
@@ -27,7 +26,7 @@ getTeamIDs <- function(year) {
     if (!http_error(path)) {
         tmp <- tempfile()
         on.exit(unlink(tmp))
-        GET(path, write_disk(tmp, overwrite=TRUE))
+        RETRY("GET", url = path, write_disk(tmp, overwrite=TRUE), timeout(15))
     } else {
         available <- grep(year, getFileNames()$event)
         if(!length(available)) {
@@ -38,8 +37,9 @@ getTeamIDs <- function(year) {
     fname <- paste0("TEAM", year)
     unzip(tmp, files = fname)
     on.exit(unlink(fname), add = TRUE)
-    read <- suppressWarnings(fread(fname, header = FALSE, drop = 2:3))
+
+    read <- suppressWarnings(read.csv(fname, header = FALSE))[c(1, 4)]
+
     out <- structure(read[[1L]], .Names = read[[2L]])
-    closeAllConnections()
     out
 }

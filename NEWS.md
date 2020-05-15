@@ -1,3 +1,11 @@
+# retrosheet 1.1.2
+  * Replaced kludge-y `closeAllConnections()` with `close()` calls to specific connections ([#1](https://github.com/colindouglas/retrosheet/issues/1))
+  * Added some rudimentary data cleanup to the `get_retrosheet()` wrapper function
+    * Dates in retrosheet data now return date-types, everything else is converted from `chr` via the relatively aggressive `type.convert()`
+  * Removed `data.table` dependency, replaced `data.table::fread()` with `base::read.csv()` calls
+  * `get_retrosheet()` now returns regular old dataframes now, instead of tibbles.
+  * Added better handling of HTTP requests. Failed requests are now retried up to three times via `httr::RETRY()`
+    
 # retrosheet 1.1.1
   * Added `get_retrosheet()`, a wrapper for `getRetrosheet()` that takes the same arguments and returns the same data, except coercing matrices into tibbles.
   * Updated tests to account for more data being added to retrosheet.org (whoops)

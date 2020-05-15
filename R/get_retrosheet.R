@@ -1,16 +1,12 @@
 #'
-#' Import single-season retrosheet data as tibbles
+#' Import single-season retrosheet data as data frames
 #'
 #' This function is a wrapper for getRetrosheet(). It downloads and parses data from
 #' \url{http://www.retrosheet.org} for the game-log, event, (play-by-play), roster, and schedule files.
-#' While getRetrosheet() returns a list of matrices, this function returns an otherwise-identical list of tibbles.
-#' It takes the same arguments, and mcan act as a drop-in replacement.
+#' While getRetrosheet() returns a list of matrices, this function returns an equivalent list of dataframes.
+#' It takes the same arguments, and can act as a drop-in replacement.
 #'
-#' @param type character.  This argument can take on either of "game" for
-#' game-logs, "play" for play-by-play (a.k.a. event) data, "roster" for
-#' team rosters, or "schedule" for the game schedule for the given year.
-#'
-#' @param ... Further arguments passed to getRetrosheet()
+#' @param ... Arguments passed to `getRetrosheet()`. `stringsAsFactors` argument is always FALSE, and will warn if passed as TRUE
 #'
 #' @return The following return values are possible for the given \code{type}
 #' \itemize{
@@ -29,7 +25,7 @@
 #' get_retrosheet("schedule", 1995)
 #'
 #' ## get the same schedule, split by time of day
-#' get_retrosheet("schedule", 1995, schedule_split = "TimeOfDay")
+#' get_retrosheet("schedule", 1995, schedSplit = "TimeOfDay")
 #'
 #' ## get the roster data for the 1995 season, listed by team
 #' get_retrosheet("roster", 1995)
@@ -41,38 +37,50 @@
 #' get_retrosheet("play", 2012, "SFN")
 #' }
 #'
-#' @importFrom purrr map
-#' @importFrom tibble as_tibble
-#' @importFrom lubridate ymd
-#' @importFrom readr col_guess cols
+#' @importFrom utils type.convert
 #' @export
 
-get_retrosheet <- function(type, ...) {
+get_retrosheet <- function(...) {
 
-    # type <- "play"; year = 2012; team = "SFN"; schedSplut = NULL;  cache = NA
-    # type <- "schedule"; year = 1995; team = "SFN"; schedSplit = NULL; cache = NA
-    # response <- getRetrosheet("roster", 1995, cache = "testdata"); type = "roster"
-    # response <- getRetrosheet(type = "schedule", year = 1995, schedSplit = "TimeOfDay")
-    # response <- getRetrosheet("play", 2012, "SFN", cache = "testdata")
-    # response <- getRetrosheet(type = "schedule", year = 1995, schedSplit = "TimeOfDay")
-    # response <- getRetrosheet(type = "schedule", year = 1995)
-    # response <- getRetrosheet("schedule", 1995, cache = "testdata")
-    response <- getRetrosheet(type, ...)
+    # Warn if the function is called with stringsAsFactors = TRUE
+    dots <- list(...)
+    if (isTRUE(dots[["stringsAsFactors"]])) {
+        warning("get_retrosheet() yields unexpected results with stringsAsFactors = TRUE. For more predictable behavior, use getRetroshet()")
+        stringsAsFactors <- TRUE
+    } else {
+        stringsAsFactors <- FALSE
+    }
 
-    matrix_to_tibble <- function(x) {
-        if (is.matrix(x) | is.data.frame(x)) {
-            out <- as_tibble(x, col_types = col_guess())
-            if ("Date" %in% colnames(out)) {
-                out$Date <- ymd(out$Date)
+    # Call the original function with all of the same arguments
+    response <- getRetrosheet(...)
+
+    matrix_to_df <- function(x) {
+
+        # If the response is a single matrix, convert it to a tibble
+        if (is.matrix(x)) x <- as.data.frame(x, stringsAsFactors = stringsAsFactors)
+
+        # If the response is a dataframe (or was a matrix and has been converted to a dataframe)
+        if (is.data.frame(x)) {
+
+            # Aggressively guess the data type via type.convert
+            out <- lapply(x, type.convert, na.strings = c("", "NA"), as.is = TRUE)
+
+            # If there's a date column, make sure it's Date-type
+            if ("Date" %in% names(out)) {
+                out$Date <- as.character(out$Date)
+                out$Date <- as.Date(out$Date, tryFormats = c("%Y-%m-%d", "%Y%m%d"))
             }
-            out
+
+            return(as.data.frame(out, stringsAsFactors = stringsAsFactors))
+
+        # If the response is a list of objects, re-apply this function to all of the objects in the list
         } else if (length(x) > 1) {
-            map(x, matrix_to_tibble)
+            lapply(x, matrix_to_df)
         } else {
-            x
+            return(x) # If the response is not a list, matrix, or df, return the input
         }
     }
 
-    matrix_to_tibble(response)
+    matrix_to_df(response)
 
 }
