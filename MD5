@@ -1,6 +1,6 @@
-c7513c161d3cc4678a7531cf64244346 *DESCRIPTION
+5f5f58f4f54efb6489908d3a2a0b29c2 *DESCRIPTION
 c41f440b19c68f93fcc6ca0f888d2ea3 *NAMESPACE
-52c964d127d14ce114916c1f4c83b325 *NEWS.md
+a57463d29670392334c78a6de01c474b *NEWS.md
 a47117bc52086f671ee2c50323722095 *R/getFileNames.R
 a621e4f54d08f4231ea676bc576ad82c *R/getParkIDs.R
 d8ecb3fc79d1c98070a92522374f7236 *R/getPartialGamelog.R
@@ -23,5 +23,5 @@ d527b22a1a524e8da7f230eb7f1b8513 *tests/testthat/test-getParkIDs.R
 6f152efff1dda64bc36b92d2cec6f0a0 *tests/testthat/test-getRetrosheet.R
 19d0e5313f027ff3069cb7df46d33681 *tests/testthat/test-getTeamIDs.R
 3757b521688d42457d7930a805812fd3 *tests/testthat/test-get_retrosheet.R
-81e7db0f41eca1f2333c500e6ca4b4f7 *tests/testthat/test-rmarkdown.R
+64d7ddc6469e478c9d54e9ff353eb17d *tests/testthat/test-rmarkdown.R
 ff42cbac3b561ccbc21dad71b3aecec9 *tests/testthat/test-rmarkdown.Rmd
