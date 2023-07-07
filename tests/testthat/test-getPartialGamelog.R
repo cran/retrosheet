@@ -1,13 +1,23 @@
 test_that("getPartialGamelog examples all work", {
-    f <- grep("HR|RBI|Park", gamelogFields, value = TRUE)
 
-    example_1 <- getPartialGamelog(2012, glFields = f)
-    example_2 <- getPartialGamelog(glFields=f, date = "20120825")
+    skip_if_offline(host = "retrosheet.org")
 
-    expect_equal(nrow(example_1), 2430)
-    expect_equal(ncol(example_1), 8)
+    interesting_columns <- c("ParkID",
+                             "VisHR", "VisRBI",
+                             "HmHR", "HmRBI")
 
-    # expect_equal(nrow(example_2), 14) # I believe this old test is wrong
-    expect_equal(nrow(example_2), 15) # This is the correct output
-    expect_equal(ncol(example_2), 8)
+    example_1 <- getPartialGamelog(2012, glFields = interesting_columns)
+    example_2 <- getPartialGamelog(glFields = interesting_columns, date = "20120825")
+
+    # Expect a row for each of the 30 teams playing 81 home games
+    expect_equal(nrow(example_1), 30 * 81)
+
+    # There should be six columns - the date, and the five interesting_columns
+    expect_equal(ncol(example_1), 1 + length(interesting_columns))
+
+    # There were 15 games played on Aug 25, 2012
+    expect_equal(nrow(example_2), 15)
+
+    # There should be six columns - the date, and the five interesting_columns
+    expect_equal(ncol(example_2), 1 + length(interesting_columns))
 })

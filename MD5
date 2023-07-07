@@ -1,6 +1,6 @@
-5f5f58f4f54efb6489908d3a2a0b29c2 *DESCRIPTION
+755d2c66b4811d1ca6576995e93cf2da *DESCRIPTION
 c41f440b19c68f93fcc6ca0f888d2ea3 *NAMESPACE
-a57463d29670392334c78a6de01c474b *NEWS.md
+fdf88a99d68e86211f733e7d3ef05659 *NEWS.md
 a47117bc52086f671ee2c50323722095 *R/getFileNames.R
 a621e4f54d08f4231ea676bc576ad82c *R/getParkIDs.R
 d8ecb3fc79d1c98070a92522374f7236 *R/getPartialGamelog.R
@@ -9,7 +9,7 @@ d8ecb3fc79d1c98070a92522374f7236 *R/getPartialGamelog.R
 31e19483f5a1fd25248b8ec22a2c84c0 *R/get_retrosheet.R
 ce00ecb461fa8c0c4f24203b4b6c1807 *R/onLoad.R
 6a59ed4f3f6263a069bc5772b58eddf3 *R/retrosheetFields.R
-de5f061af9faf496ea342a3d5126cd5b *README.md
+64913618a7844c2596f5b6e6b2e4cac1 *README.md
 78ef41ac672e2d88df6e773bcf8b410a *man/getFileNames.Rd
 1ce908f36c20e8f44aeb03099858025d *man/getParkIDs.Rd
 07576ff12da7fe37a608242221718fae *man/getPartialGamelog.Rd
@@ -17,11 +17,11 @@ de5f061af9faf496ea342a3d5126cd5b *README.md
 9145d93d60c09fb6517242b14b6ed871 *man/getTeamIDs.Rd
 aac0b5c37d3fa57ee59288b37dce443a *man/get_retrosheet.Rd
 27abf1a6e011375e207f2ebe33aad711 *tests/testthat.R
-5a2478a4162e21edff5197a098b8e06a *tests/testthat/test-getFileNames.R
-d527b22a1a524e8da7f230eb7f1b8513 *tests/testthat/test-getParkIDs.R
-3956be543f0bb0df9883d114fc1b62d8 *tests/testthat/test-getPartialGamelog.R
-6f152efff1dda64bc36b92d2cec6f0a0 *tests/testthat/test-getRetrosheet.R
-19d0e5313f027ff3069cb7df46d33681 *tests/testthat/test-getTeamIDs.R
-3757b521688d42457d7930a805812fd3 *tests/testthat/test-get_retrosheet.R
-64d7ddc6469e478c9d54e9ff353eb17d *tests/testthat/test-rmarkdown.R
+57d3b4e06574a0e6cd70c7ff902ca7c2 *tests/testthat/test-getFileNames.R
+18d6b1f2aaa0f7ba6e7ec0527192e6e1 *tests/testthat/test-getParkIDs.R
+134e2554e9850cc58f978543aa7a3e06 *tests/testthat/test-getPartialGamelog.R
+f089bdfab501d5c7e63b2d7411c40ef1 *tests/testthat/test-getRetrosheet.R
+1c13dcb8efeb4ea19d79217125e9ed36 *tests/testthat/test-getTeamIDs.R
+d585bdcec1f14b195bb7dc1d966ee762 *tests/testthat/test-get_retrosheet.R
+88b6af67a96f84ee241f5eecbcd7a6b5 *tests/testthat/test-rmarkdown.R
 ff42cbac3b561ccbc21dad71b3aecec9 *tests/testthat/test-rmarkdown.Rmd
